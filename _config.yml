@@ -1,0 +1,12 @@
+# Site settings
+title: To be quiet , To listen
+email: chinazoujy@gmail.com
+description: You can say anything, but please think it over.
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "http://chinazoujy.com" # the base hostname & protocol for your site
+
+#twitter_username: jekyllrb
+github_username:  chinazoujy
+
+# Build settings
+markdown: kramdown
