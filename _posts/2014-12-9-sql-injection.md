@@ -1,3 +1,11 @@
+---
+layout: post
+title: "SQL inject attack"
+data: 2014-12-9
+categories: web
+tag: web security
+---
+
 1.web 代理：Paros Proxy, WebScarab, Burp Suite
 
 2.用户请求触发数据库错误时的场景：
