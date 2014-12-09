@@ -19,12 +19,12 @@ tag: web security
 	- MS ： `waitfor delay '0:0:5'`
 	- MySQL： `BENCHMARK（100000000， ENCODE('hello','mom')）`
 	- ORACLE PL/SQL：
-	         {% highlight  ruby %}
-	   	  BEGIN
-		    DBMS_LOCK.SLEEP(5);
-		  END;
-                 # 不可直接注入到子查询中，oracle 不支持堆迭查询。只有管理员才能使用DBMS_LOCK包
-		{%  endhighlight %}
+{% highlight  ruby %}
+BEGIN
+DBMS_LOCK.SLEEP(5);
+END;
+# 不可直接注入到子查询中，oracle 不支持堆迭查询。只有管理员才能使用DBMS_LOCK包
+{%  endhighlight %}
 4. 寻找SQL注入：
    - 1）识别 Web 应用接收的数据输入， 2）修改输入值以包含危险的字符串 3）检测服务器返回的异常。
    - 使用 Web 代理角色扮演工具有助于绕过客户端限制，完全控制发送给服务器的请求。此外，它们还能提高服务器响应的可见度，
