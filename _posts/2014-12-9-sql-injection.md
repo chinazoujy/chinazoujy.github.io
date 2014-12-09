@@ -6,16 +6,16 @@ categories: web
 tag: web security
 ---
 
-1.web 代理：Paros Proxy, WebScarab, Burp Suite
+1. web 代理：Paros Proxy, WebScarab, Burp Suite
 
-2.用户请求触发数据库错误时的场景：
+2. 用户请求触发数据库错误时的场景：
 	1.将SQL错误显示在页面上，它对WEB浏览器用户可见
 	2.将SQL错误隐藏在WEB页面的源代码中以便于调试
 	3.检测到错误时跳转到另一个页面
 	4.返回HTTP错误代码500（内部服务器错误）或HTTP重定向代码302
 	5.应用适当地处理错误但不显示结果，可能会显示一个通用的错误页面。
 
-3.时间延迟： MS ： waitfor delay '0:0:5'
+3. 时间延迟： MS ： waitfor delay '0:0:5'
 	   MySQL： BENCHMARK（100000000， ENCODE('hello','mom')）
 	   ORACLE PL/SQL：
 	   	  BEGIN
@@ -23,7 +23,7 @@ tag: web security
 		  END;
                   不可直接注入到子查询中，oracle 不支持堆迭查询。只有管理员才能使用DBMS_LOCK包
 
-4.寻找SQL注入：
+4. 寻找SQL注入：
   1）识别 Web 应用接收的数据输入， 2）修改输入值以包含危险的字符串 3）检测服务器返回的异常。
   
   使用 Web 代理角色扮演工具有助于绕过客户端限制，完全控制发送给服务器的请求。此外，它们还能提高服务器响应的可见度，
@@ -32,16 +32,16 @@ tag: web security
   
   包含数据库错误或http 错误代码的服务器响应通常能降低识别SQL 注入漏洞的难度。不过SQL 盲注是一种即使应用不返回错误也能利用漏洞的技术。
 
-5.确认SQL 注入：要想确认一个SQL注入漏洞并进一步加以利用，需要构造一条能注入SQL 代码的请求以便应用创建一条语法正确的SQL语句，之后由数据库服务器执行该语句且不返回任何错误。
+5. 确认SQL 注入：要想确认一个SQL注入漏洞并进一步加以利用，需要构造一条能注入SQL 代码的请求以便应用创建一条语法正确的SQL语句，之后由数据库服务器执行该语句且不返回任何错误。
 
    创建语法正确的语句时，可以终止它并注释剩下的查询。对于这种情况，通常可以毫无约束地连接任意SQL代码（假设后台数据库支持执行多条语句），进而提供执行攻击（如权限提升）的能力。
  
    有时，应用对注入操作没有回复任何可见的信息。这时可以通过向来自数据库的回复引入延迟来确认注入。应用服务器将等待数据库回复，我们则可以确认是否存在漏洞。对于这种情况，需要意识到网络和服务器工作负荷可能会对延迟造成轻微干扰。
 
-6.自动发现SQL 注入。
+6. 自动发现SQL 注入。
    - 寻找SQL 注入漏洞所涉及的操作可以被适度自动化。当需要测试大型的Web 站点时，自动技术非常有用，但需要意识到自动发现工具可能无法识别某些存在的漏洞，不能完全依赖自动化的工具
 
-7.引发SQL 注入漏洞的主要原因：
+7. 引发SQL 注入漏洞的主要原因：
    - Web 应用未对用户提供的数据进行充分审查或未对输出进行编码是产生问题的主要原因，此外，攻击者还可以利用其他问题，比如糟糕的设计或不良的编码实践。如果缺少输入审查，那么所有这些问题都将可以被利用。
 
 8. YASCA 是一个开源程序，用于寻找程序源代码中的安全漏洞和代码质量问题，支持的编程语言有PHP、Java 和 JavaScript（默认）。
@@ -50,7 +50,7 @@ tag: web security
  
  - Microsoft SQL 注入源代码分析器是一款静态代码分析工具，用于发现ASP 代码中的SQL 注入漏洞。该工具针对传统的ASP 代码而非.net 代码。此外，该工具只能理解使用VBScript 编写的传统的ASP代码，而无法分析使用由其他语言（如JAVASCRIPT）编写的服务器端代码。
 
-9.-自动工具集成了三种不同的分析方法：基于字符串的模式匹配，词法标记匹配及借助抽象语法树AST和控制流图CFG的数据流分析。
+9. -自动工具集成了三种不同的分析方法：基于字符串的模式匹配，词法标记匹配及借助抽象语法树AST和控制流图CFG的数据流分析。
 
   -有些自动工具使用正则表达式字符串匹配来识别渗入点（将受感染数据作为参数传递）和渗入源（应用中产生不可信数据的位置点）
   
@@ -65,24 +65,24 @@ tag: web security
 10. 识别数据库
      - ASP和.net 通常使用 Microsoft SQL Server 作为后台数据库，而PHP 应用则很可能使用 MYSQL。如果应用是用JAVA 编写的，那么使用的可能是ORACLE或者MYSQL， 此外，底层操作系统也可以提供一些线索：安装IIS 作为服务器平台标志着应用是基于WINDOWS 的架构，后台服务器很可能是SQL SERVER。而运行APACHE 和PHP 的LINUX 服务器很可能使用的是开源数据库。比如MYSQL。识别数据库的最好方法在很大程度上取决于是否处于盲态。如果应用返回（至少在某种程度上）查询结果和（或）DBMS错误消息（例如，非盲态），那么跟踪会相当简单，因为可以很容易通过产生的输出结果来提供关于底层技术的信息。但如果处于盲态，无法让应用返回DBMS 消息，那么就需要改变方法，尝试注入多种著名的、只针对特定技术才能执行的查询。通过判断这些查询中哪一条被成功执行，来获取目前所面对的DBMS 的精确信息。
 
-11.非盲跟踪
+11. 非盲跟踪
  - www.ora-code.com :提供了一个完整的ORACLE错误消息库
 
-12.获取数据库版本标志信息。
+12. 获取数据库版本标志信息。
  - SQL SERVER： SELECT @@version
  - MySQL：	select version()  ;  
    		 select @@version
  - Oracle: 	select banner from v$version;
    		select banner from v$version where rownum=1
 
-13.从字符串推断DBMS 版本
+13. 从字符串推断DBMS 版本
  - SQL SERVER： select ‘some’+‘string’
  - MySQL:	select 'some'+'string'
    		select concat('some', 'string')
  - Oracle:	select 'some' || 'string'
    		select concat('some', 'string')
 
-14.从数字函数推断DBMS 版本
+14. 从数字函数推断DBMS 版本
  - SQL SERVER： @@pack_received
        		@@rowcount
  - MySQL：	connection_id()
@@ -90,7 +90,7 @@ tag: web security
 		row_count()
  - Oracle	BITAND(1,1)
 
-15.识别MYSQL 的小技巧
+15. 识别MYSQL 的小技巧
  - select 1 /*!40119 + 1 */
  该查询将返回下列结果：
   - 2 （如果MYSQL 版本为4.01.19 或更高版本）
