@@ -1,8 +1,11 @@
-# SQL 注入笔记二
-
-标签（空格分隔）： WEB SQL
-
 ---
+layout: post
+title: "SQL 注入笔记二"
+data: 2014-12-25
+categories: web SQL
+tag: web security
+---
+
 
 渗透测试步骤：
 
