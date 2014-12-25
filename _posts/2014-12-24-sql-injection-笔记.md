@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "WEB SECURITY notes 1"
+title: "WEB SECURITY NOTES 1"
 data: 2014-12-24
 categories: web SQL
 tag: web security
