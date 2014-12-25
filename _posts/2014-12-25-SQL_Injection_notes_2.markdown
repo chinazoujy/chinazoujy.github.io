@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "SQL 注入笔记二"
+title: "WEB SECURITY NOTES 2"
 data: 2014-12-25
 categories: web SQL
 tag: web security
